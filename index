@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제니의숲 셀프사진관 | 촬영 체크리스트</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #FAF7F2;
+            --bg-warm: #F5EFE6;
+            --text-dark: #2C2C2C;
+            --text-medium: #5A5A5A;
+            --text-light: #8A8A8A;
+            --accent-forest: #4A6741;
+            --accent-forest-light: #6B8B63;
+            --accent-gold: #C4A962;
+            --accent-rose: #C9A4A4;
+            --border-soft: rgba(74, 103, 65, 0.15);
+            --shadow-soft: 0 4px 20px rgba(74, 103, 65, 0.08);
+            --shadow-hover: 0 8px 30px rgba(74, 103, 65, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--bg-cream);
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        /* Decorative Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(74, 103, 65, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(196, 169, 98, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(201, 164, 164, 0.02) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+        }
+
+        .logo-wrapper {
+            display: inline-block;
+            position: relative;
+        }
+
+        .logo-wrapper::before,
+        .logo-wrapper::after {
+            content: '✦';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-gold);
+            font-size: 12px;
+            opacity: 0.6;
+        }
+
+        .logo-wrapper::before {
+            left: -30px;
+        }
+
+        .logo-wrapper::after {
+            right: -30px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 500;
+            color: var(--accent-forest);
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .intro-text {
+            max-width: 500px;
+            margin: 30px auto 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--border-soft);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-forest), var(--accent-forest-light));
+            border-radius: 2px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0%;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+        }
+
+        .progress-text span {
+            color: var(--accent-forest);
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+
+        /* Section Styling */
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-soft);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        .section:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-soft);
+        }
+
+        .section-number {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-forest), var(--accent-forest-light));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+
+        /* Checklist Items */
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px dashed var(--border-soft);
+            transition: all 0.2s ease;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .checklist-item:first-child {
+            padding-top: 0;
+        }
+
+        .checkbox-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .checkbox {
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--border-soft);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .checkbox:hover {
+            border-color: var(--accent-forest-light);
+        }
+
+        .checkbox:checked {
+            background: var(--accent-forest);
+            border-color: var(--accent-forest);
+        }
+
+        .checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .item-label {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .checklist-item.completed .item-label {
+            color: var(--text-light);
+            text-decoration: line-through;
+        }
+
+        .item-hint {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 4px;
+            padding-left: 12px;
+            border-left: 2px solid var(--accent-gold);
+        }
+
+        /* Important Notice */
+        .notice {
+            background: linear-gradient(135deg, rgba(74, 103, 65, 0.05), rgba(196, 169, 98, 0.05));
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 16px;
+            border-left: 3px solid var(--accent-gold);
+        }
+
+        .notice-title {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--accent-forest);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .notice-text {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+
+        /* Complete Button */
+        .complete-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .complete-message {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-bottom: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .complete-message.visible {
+            opacity: 1;
+        }
+
+        .reset-btn {
+            background: transparent;
+            border: 2px solid var(--accent-forest);
+            color: var(--accent-forest);
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .reset-btn:hover {
+            background: var(--accent-forest);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-soft);
+            margin-top: 40px;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--accent-forest);
+            margin-bottom: 12px;
+        }
+
+        .footer-text {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .event-banner {
+            background: linear-gradient(135deg, var(--accent-forest), var(--accent-forest-light));
+            color: white;
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin-top: 24px;
+            text-align: left;
+        }
+
+        .event-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .event-desc {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Celebration Animation */
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+        }
+
+        .celebration.active {
+            display: block;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-gold);
+            animation: confetti-fall 3s ease-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header {
+                padding: 40px 16px 30px;
+            }
+
+            .section {
+                padding: 24px 20px;
+                border-radius: 12px;
+            }
+
+            .section-header {
+                gap: 12px;
+            }
+
+            .section-number {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.05rem;
+            }
+
+            .checklist-item {
+                gap: 12px;
+                padding: 12px 0;
+            }
+
+            .checkbox {
+                width: 20px;
+                height: 20px;
+            }
+
+            .item-label {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-wrapper">
+            <h1>Jenny's Forest</h1>
+        </div>
+        <p class="subtitle">Self Photo Studio Checklist</p>
+        <p class="intro-text">
+            아래 체크리스트를 따라 진행하시면<br>
+            누구나 쉽게 멋진 사진을 촬영하실 수 있어요 ✨
+        </p>
+    </header>
+
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="progress-text">진행률 <span id="progressPercent">0%</span> · <span id="completedCount">0</span>/<span id="totalCount">0</span> 완료</p>
+    </div>
+
+    <main>
+        <!-- Section 1: 이용 전 준비 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <div>
+                    <div class="section-title">이용 전 준비하기</div>
+                    <div class="section-subtitle">촬영 전 점검사항</div>
+                </div>
+            </div>
+            <ul class="checklist">
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check1">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check1">파우더룸에서 헤어/메이크업 점검</label>
+                        <p class="item-hint">옷, 화장, 머리 상태를 확인하세요</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check2">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check2">촬영 소품 확인</label>
+                        <p class="item-hint">꽃, 소품 등을 활용해보세요</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check3">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check3">타임랩스용 삼각대 확인</label>
+                        <p class="item-hint">📷 타임랩스 촬영 시 삼각대를 활용하세요</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check4">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check4">기존 고객 사진 레퍼런스 확인</label>
+                        <p class="item-hint">셀프흑백룸 고객사진을 참고하여 촬영 계획 세우기</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Section 2: 카메라 세팅 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <div>
+                    <div class="section-title">카메라 세팅</div>
+                    <div class="section-subtitle">장비 점검 및 연결</div>
+                </div>
+            </div>
+            <ul class="checklist">
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check5">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check5">콘센트에 3가지 코드 연결</label>
+                        <p class="item-hint">⚡ 퇴실 시 반드시 빼주세요 (화재 예방)</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check6">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check6">카메라 전원 ON 확인</label>
+                        <p class="item-hint">전원 스위치가 ON 위치에 있는지 확인</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check7">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check7">M모드 및 '-' 라인 맞춤 확인</label>
+                        <p class="item-hint">M과 - 라인이 정확히 맞는지 체크</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check8">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check8">동조기 장착 확인</label>
+                        <p class="item-hint">동조기가 카메라에 제대로 장착되어 있는지 확인</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check9">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check9">카메라선 연결 확인 (3가지)</label>
+                        <p class="item-hint">세 가지 케이블이 모두 연결되어 있는지 확인</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Section 3: 컴퓨터 세팅 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <div>
+                    <div class="section-title">컴퓨터 세팅</div>
+                    <div class="section-subtitle">라이트룸 연결 촬영 설정</div>
+                </div>
+            </div>
+            <ul class="checklist">
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check10">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check10">컴퓨터 켜기 (마우스 흔들기)</label>
+                        <p class="item-hint">보통 켜져 있으니 마우스만 움직여주세요</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check11">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check11">Adobe Lightroom Classic 실행 (바탕화면)</label>
+                        <p class="item-hint">⚠️ 일반 Lightroom이 아닌 Classic 버전!</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check12">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check12">파일 → 연결전송된 촬영 → 연결전송된 촬영시작</label>
+                        <p class="item-hint">메뉴 순서대로 클릭</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check13">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check13">세션 이름 설정 (내 파일명)</label>
+                        <p class="item-hint">원하는 파일명을 입력 후 확인</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check14">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check14">촬영 설정값 확인</label>
+                        <p class="item-hint">📸 셔터 160 / ISO 100 / 조리개 10</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Section 4: 구도 세팅 & 촬영 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <div>
+                    <div class="section-title">구도 세팅 & 촬영</div>
+                    <div class="section-subtitle">테스트 및 본 촬영</div>
+                </div>
+            </div>
+            <ul class="checklist">
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check15">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check15">라이브뷰 모드 ON 설정</label>
+                        <p class="item-hint">모니터로 화면을 보면서 구도 잡기 위해</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check16">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check16">유선 리모콘으로 구도/화각/각도 설정</label>
+                        <p class="item-hint">모니터 화면을 보면서 원하는 구도 잡기</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check17">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check17">화각 설정</label>
+                        <p class="item-hint">전체샷 24~28mm / 인물 중심 35mm 권장</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check18">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check18">구도 설정 완료 후 라이브뷰 모드 OFF</label>
+                        <p class="item-hint">⚠️ 라이브뷰 ON 상태에서는 조명이 작동 안 함!</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check19">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check19">테스트 촬영으로 플래시 작동 확인</label>
+                        <p class="item-hint">버튼 두 번 누르기 (찰칵 후 한 번 더) / 카메라 앞에서 테스트</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check20">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check20">100분간 자유롭게 촬영! 📸</label>
+                    </div>
+                </li>
+            </ul>
+            <div class="notice">
+                <div class="notice-title">💡 촬영 팁</div>
+                <div class="notice-text">
+                    모니터 화면을 보면서 촬영하기는 어려워요.<br>
+                    구도를 잡을 때만 모니터로 확인하고, 촬영 시에는 리모콘을 활용하세요!
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: 마무리 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <div>
+                    <div class="section-title">마무리</div>
+                    <div class="section-subtitle">보정, 출력, 정리</div>
+                </div>
+            </div>
+            <ul class="checklist">
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check21">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check21">사진 보정하기</label>
+                        <p class="item-hint">제니의숲 시그니처 필터 + 온도/노출/텍스처 조절</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check22">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check22">잘 나온 사진 별점(숫자 5) 매기기</label>
+                        <p class="item-hint">필터 → 평가됨으로 선별 가능</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check23">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check23">프린터 전원 켜기</label>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check24">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check24">인화지 확인 (기본 4매)</label>
+                        <p class="item-hint">추가: 3장 1만원 / 1장 5천원</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check25">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check25">사진 출력하기</label>
+                        <p class="item-hint">⚠️ 인쇄 설정이 동일한지 꼭 확인!</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check26">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check26">원본 파일 전송하기</label>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check27">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check27">콘센트 코드 빼기 (화재 예방)</label>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox" id="check28">
+                    </div>
+                    <div class="item-content">
+                        <label class="item-label" for="check28">사용 후 정리 완료</label>
+                        <p class="item-hint">다음 손님을 위해 정리 부탁드려요 🙏</p>
+                    </div>
+                </li>
+            </ul>
+            <div class="event-banner">
+                <div class="event-title">🎁 제니의숲 이벤트</div>
+                <div class="event-desc">
+                    포토리뷰 작성 시 <strong>30분 추가</strong> 또는 <strong>인화지 서비스</strong>!<br>
+                    재방문 시 <strong>5천원 할인</strong> (꼭 말씀해주세요!)
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="complete-section">
+        <p class="complete-message" id="completeMessage">
+            🎉 모든 체크리스트를 완료했어요!<br>
+            멋진 사진 많이 남기셨길 바라요 ✨
+        </p>
+        <button class="reset-btn" onclick="resetChecklist()">체크리스트 초기화</button>
+    </div>
+
+    <footer>
+        <div class="footer-logo">Jenny's Forest</div>
+        <p class="footer-text">
+            제니의숲 셀프사진관<br>
+            무인으로 운영되는 스튜디오입니다
+        </p>
+    </footer>
+
+    <div class="celebration" id="celebration"></div>
+
+    <script>
+        // Initialize
+        const checkboxes = document.querySelectorAll('.checkbox');
+        const totalCount = checkboxes.length;
+        const progressFill = document.getElementById('progressFill');
+        const progressPercent = document.getElementById('progressPercent');
+        const completedCountEl = document.getElementById('completedCount');
+        const totalCountEl = document.getElementById('totalCount');
+        const completeMessage = document.getElementById('completeMessage');
+
+        totalCountEl.textContent = totalCount;
+
+        // Load saved state
+        function loadState() {
+            const saved = localStorage.getItem('jennyForestChecklist');
+            if (saved) {
+                const checked = JSON.parse(saved);
+                checkboxes.forEach((cb, i) => {
+                    if (checked[i]) {
+                        cb.checked = true;
+                        cb.closest('.checklist-item').classList.add('completed');
+                    }
+                });
+            }
+            updateProgress();
+        }
+
+        // Save state
+        function saveState() {
+            const checked = Array.from(checkboxes).map(cb => cb.checked);
+            localStorage.setItem('jennyForestChecklist', JSON.stringify(checked));
+        }
+
+        // Update progress
+        function updateProgress() {
+            const completed = Array.from(checkboxes).filter(cb => cb.checked).length;
+            const percent = Math.round((completed / totalCount) * 100);
+            
+            progressFill.style.width = percent + '%';
+            progressPercent.textContent = percent + '%';
+            completedCountEl.textContent = completed;
+
+            if (completed === totalCount) {
+                completeMessage.classList.add('visible');
+                triggerCelebration();
+            } else {
+                completeMessage.classList.remove('visible');
+            }
+        }
+
+        // Checkbox event
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', function() {
+                const item = this.closest('.checklist-item');
+                if (this.checked) {
+                    item.classList.add('completed');
+                } else {
+                    item.classList.remove('completed');
+                }
+                saveState();
+                updateProgress();
+            });
+        });
+
+        // Reset
+        function resetChecklist() {
+            checkboxes.forEach(cb => {
+                cb.checked = false;
+                cb.closest('.checklist-item').classList.remove('completed');
+            });
+            localStorage.removeItem('jennyForestChecklist');
+            updateProgress();
+        }
+
+        // Celebration
+        function triggerCelebration() {
+            const celebration = document.getElementById('celebration');
+            celebration.classList.add('active');
+            celebration.innerHTML = '';
+
+            const colors = ['#4A6741', '#C4A962', '#C9A4A4', '#6B8B63', '#E8D5B7'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.width = (Math.random() * 8 + 6) + 'px';
+                confetti.style.height = confetti.style.width;
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                celebration.appendChild(confetti);
+            }
+
+            setTimeout(() => {
+                celebration.classList.remove('active');
+            }, 4000);
+        }
+
+        // Initialize
+        loadState();
+    </script>
+</body>
+</html>
